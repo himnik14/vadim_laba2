@@ -9,13 +9,28 @@ class Copy
     ofstream fout;
     string _line;
 public:
+    string get_line();
     Copy();
     Copy(string _line);
     ~Copy();
+    Copy(const Copy& cp);
     void set(string _line);
     string update();
     void print();
 };
+
+string Copy::get_line()
+{
+    return _line;
+}
+
+// конструктор копирования класса Copy
+// передается ссылка на Copy
+Copy::Copy(const Copy& cp)
+{  // копирование данных из одного объекта в другой
+    _line = cp._line;
+    cout << "Сработал конструктор копирования!\n";
+}
 
 string Copy::update()
 {
@@ -75,13 +90,17 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
     Copy cp;//конструктор по умолчанию
-    Copy cp1("Строка2 д8ля констр64укто6ра по умол224566чанию!");//конструктор с параметром
+    Copy cp1("Строка2 д8ля констр64укто6ра с пара2метром2!");//конструктор с параметром
     Copy cp2;
     cout << cp.update() << "\n";
     cout << cp1.update() << "\n";
-    cp2.set("пизда2");
+    cp2.set("2вгту5");
     cp2.update();
     cp2.print();
+    // код, который вызывает конструктор копирования
+    Copy cp3("линия");
+    Copy cp4 = cp3; // инициализация объекта => вызывается конструктор копирования
+    cp4.print();
 
 }
 
